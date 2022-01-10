@@ -17,10 +17,6 @@ inputArtifacts:
 
 steps:
   - type: Command
-    name: "Build Hello"
-    timeoutInSeconds: 4000
-    shell: /bin/sh
-  - type: Command
     name: "Install Make"
     timeoutInSeconds: 4000
     command: |
