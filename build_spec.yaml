@@ -17,11 +17,6 @@ inputArtifacts:
 
 steps:
   - type: Command
-    name: "Install Make"
-    timeoutInSeconds: 4000
-    command: |
-      apt-get -y install make
-  - type: Command
     timeoutInSeconds: 400
     name: "Docker Build"
     command: |
