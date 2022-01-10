@@ -6,12 +6,11 @@ shell: bash
 # Variables
 env:
   variables:
-    "testEnv" : "testValue1"
+    "IMAGE" : "danberg/hello-py"
  # vaultVariables:
  #   docker_registry_password : <secret-ocid>
- # exportedVariables:
- #   - patch_number
- #   - build_Result
+  exportedVariables:
+    - HelloImageTag
 
 inputArtifacts:
 
@@ -20,7 +19,8 @@ steps:
     timeoutInSeconds: 400
     name: "Docker Build"
     command: |
-      make docker-build
+      HelloImageTag=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
+      docker build -t $(IMAGE) -f Dockerfile ${HelloImageTag}
     onFailure:
       - type: Command
         command: |
@@ -32,4 +32,4 @@ steps:
 outputArtifacts:
   - name: hello-py
     type: DOCKER_IMAGE
-    location: docker-image
+    location: ${IMAGE}.${HelloImageTag}
