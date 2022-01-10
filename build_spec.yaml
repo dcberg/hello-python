@@ -20,14 +20,14 @@ steps:
     name: "Docker Build"
     command: |
       HelloImageTag=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
-      docker build -t ${IMAGE} -f Dockerfile ${HelloImageTag}
-    onFailure:
-      - type: Command
-        command: |
-          echo "Handling Failure"
-          build_result=FAILURE
-          echo "Failure successfully handled"
-        timeoutInSeconds: 400
+      docker build -t ${IMAGE}.${HelloImageTag} -f Dockerfile .
+ #   onFailure:
+ #     - type: Command
+ #       command: |
+ #         echo "Handling Failure"
+ #         build_result=FAILURE
+ #         echo "Failure successfully handled"
+ #       timeoutInSeconds: 400
         
 outputArtifacts:
   - name: hello-py
