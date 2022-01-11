@@ -8,4 +8,5 @@ steps:
     name: "Mirror remote repo"
     timeoutInSeconds: 400
     command: |
+      oci -v
       oci devops repository mirror --repository-id ocid1.devopsrepository.oc1.phx.amaaaaaayat6pyaah6x6oynezgenfvpj4qwcb4fdpy2jzvjkmr6rizuoovrq
