@@ -15,7 +15,7 @@ steps:
     timeoutInSeconds: 400
     command: |
       chmod +x ${OCI_WORKSPACE_DIR}/install_oci.sh
-      ${OCI_WORKSPACE_DIR}/install_oci.sh --accept-all-defaults true
+      ${OCI_WORKSPACE_DIR}/install_oci.sh --accept-all-defaults
   - type: Command
     name: "Mirror remote repo"
     timeoutInSeconds: 400
