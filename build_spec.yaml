@@ -19,7 +19,7 @@ steps:
     name: "Export image tag"
     timeoutInSeconds: 40
     command: |
-      export TAG_VERSION=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
+      export TAG_VERSION=`echo ${OCI_BUILD_RUN_ID} | tail -c 8`
   - type: Command
     name: "Echo TAG_VERSION"
     command: |
