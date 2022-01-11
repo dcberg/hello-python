@@ -6,7 +6,7 @@ shell: bash
 # Variables
 env:
   variables:
-    "IMAGE" : "danberg/hello-py"
+    "TAG_VERSION" : "latest"
  # vaultVariables:
  #   docker_registry_password : <secret-ocid>
   exportedVariables:
@@ -16,20 +16,28 @@ inputArtifacts:
 
 steps:
   - type: Command
+    name: "Export image tag"
+    timeoutInSeconds: 40
+    command: |
+      export TAG_VERSION=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
+  - type: Command
+    name: "Echo TAG_VERSION"
+    command: |
+      echo "TAG_VERSION = " + $TAG_VERSION
+  - type: Command
     timeoutInSeconds: 400
     name: "Docker Build"
     command: |
-      HelloImageTag=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
-      docker build -t ${IMAGE}.${HelloImageTag} -f Dockerfile .
- #   onFailure:
- #     - type: Command
- #       command: |
- #         echo "Handling Failure"
- #         build_result=FAILURE
- #         echo "Failure successfully handled"
- #       timeoutInSeconds: 400
+      docker build -t danberg/hello-py -f Dockerfile .
+    onFailure:
+      - type: Command
+        command: |
+          echo "Handling image build failure"
+          build_result=FAILURE
+          echo "Failure successfully handled"
+        timeoutInSeconds: 400
         
 outputArtifacts:
-  - name: hello-py
+  - name: hello-image
     type: DOCKER_IMAGE
-    location: ${IMAGE}.${HelloImageTag}
+    location: danberg/hello-py
