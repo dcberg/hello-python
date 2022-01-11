@@ -5,6 +5,12 @@ shell: bash
 
 steps:
   - type: Command
+    name: "Update OCI"
+    timeoutInSeconds: 400
+    command: |
+      oci -v
+      yum update python36-oci-cli
+  - type: Command
     name: "Mirror remote repo"
     timeoutInSeconds: 400
     command: |
