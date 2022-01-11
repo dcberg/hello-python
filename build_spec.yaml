@@ -5,13 +5,11 @@ shell: bash
 
 # Variables
 env:
-  variables:
+  exportedVariables:
     "TAG_VERSION" : "latest"
     "COMMIT" : "0"
   vaultVariables:
     docker_registry_password : ocid1.vaultsecret.oc1.phx.amaaaaaayat6pyaacvggvlf6hmbgqguquempfl73xfo7fce5r4tiqh5ulgjq
-  exportedVariables:
-    - HelloImageTag
 
 inputArtifacts:
 
