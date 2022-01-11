@@ -5,11 +5,16 @@ shell: bash
 
 steps:
   - type: Command
-    name: "Update OCI"
+    name: "Download OCI"
     timeoutInSeconds: 400
     command: |
       oci -v
-      bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh) --accept-all-defaults"
+      curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh
+  - type: Command
+    name: "Update OCI CLI"
+    timeoutInSeconds: 400
+    command: |
+      ./install.sh --accept-all-defaults
   - type: Command
     name: "Mirror remote repo"
     timeoutInSeconds: 400
