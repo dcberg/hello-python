@@ -7,8 +7,8 @@ shell: bash
 env:
   variables:
     "TAG_VERSION" : "latest"
- # vaultVariables:
- #   docker_registry_password : <secret-ocid>
+  vaultVariables:
+    docker_registry_password : ocid1.vaultsecret.oc1.phx.amaaaaaayat6pyaacvggvlf6hmbgqguquempfl73xfo7fce5r4tiqh5ulgjq
   exportedVariables:
     - HelloImageTag
 
@@ -23,12 +23,13 @@ steps:
   - type: Command
     name: "Echo TAG_VERSION"
     command: |
-      echo "TAG_VERSION = " + $TAG_VERSION
+      echo "TAG_VERSION = " $TAG_VERSION
   - type: Command
     timeoutInSeconds: 400
     name: "Docker Build"
     command: |
       docker build -t danberg/hello-py -f Dockerfile .
+      docker tag danberg/hello-py:latest danberg/hello-py:$TAG_VERSION
     onFailure:
       - type: Command
         command: |
@@ -36,6 +37,16 @@ steps:
           build_result=FAILURE
           echo "Failure successfully handled"
         timeoutInSeconds: 400
+  - type: Command
+    timeoutInSeconds: 60
+    name: "Log into Dockerhub"
+    command: |
+      docker login -u "danberg" -p ${docker_registry_password}
+  - type: Command
+    timeoutInSeconds: 400
+    name: "Push image to Dockerhub"
+    command: |
+      docker push danberg/hello-py:$TAG_VERSION
         
 outputArtifacts:
   - name: hello-image
