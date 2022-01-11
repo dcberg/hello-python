@@ -40,7 +40,7 @@ steps:
         command: |
           echo "Handling image build failure"
           build_result=FAILURE
-          echo "Failure successfully handled"
+          echo "Image build failure successfully handled"
         timeoutInSeconds: 400
   - type: Command
     timeoutInSeconds: 60
