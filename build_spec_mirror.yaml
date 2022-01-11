@@ -11,6 +11,11 @@ steps:
       oci -v
       curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh --output ${OCI_WORKSPACE_DIR}/install_oci.sh
   - type: Command
+    name: "Remove existing OCI install dir"
+    timeoutInSeconds: 60
+    command: |
+      rm -r /root/lib/oracle-cli
+  - type: Command
     name: "Update OCI CLI"
     timeoutInSeconds: 400
     command: |
