@@ -6,8 +6,8 @@ shell: bash
 # Variables
 env:
   exportedVariables:
-    "TAG_VERSION" : "latest"
-    "COMMIT" : "0"
+    - TAG_VERSION
+    - COMMIT
   vaultVariables:
     docker_registry_password : ocid1.vaultsecret.oc1.phx.amaaaaaayat6pyaacvggvlf6hmbgqguquempfl73xfo7fce5r4tiqh5ulgjq
 
