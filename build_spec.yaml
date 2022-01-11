@@ -52,8 +52,16 @@ steps:
     name: "Push image to Dockerhub with proper tag"
     command: |
       docker push danberg/hello-py:$TAG_VERSION
+  - type: Command
+    timeoutInSeconds: 40
+    name: "Copy Kubernetes manifest"
+    command: |
+      cp /kubernetes/deployment_oke.yaml deployment/deployment_oke.yaml
         
 outputArtifacts:
+  - name: deployment-manifest
+    type: BINARY
+    location: deployment/deployment_oke.yaml
   - name: hello-image
     type: DOCKER_IMAGE
     location: danberg/hello-py
