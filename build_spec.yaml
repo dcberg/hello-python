@@ -7,6 +7,7 @@ shell: bash
 env:
   variables:
     "TAG_VERSION" : "latest"
+    "COMMIT" : "0"
   vaultVariables:
     docker_registry_password : ocid1.vaultsecret.oc1.phx.amaaaaaayat6pyaacvggvlf6hmbgqguquempfl73xfo7fce5r4tiqh5ulgjq
   exportedVariables:
@@ -21,9 +22,15 @@ steps:
     command: |
       export TAG_VERSION=`echo ${OCI_BUILD_RUN_ID} | tail -c 8`
   - type: Command
-    name: "Echo TAG_VERSION"
+    name: "Export commit tag"
+    timeoutInSeconds: 20
+    command: |
+      export COMMIT?=`$(shell git rev-parse --short HEAD)`
+  - type: Command
+    name: "Echo Variables"
     command: |
       echo "TAG_VERSION = " $TAG_VERSION
+      echo "COMMIT = " $COMMIT
   - type: Command
     timeoutInSeconds: 400
     name: "Docker Build"
