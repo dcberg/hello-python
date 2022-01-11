@@ -23,7 +23,7 @@ steps:
     name: "Export commit tag"
     timeoutInSeconds: 20
     command: |
-      export COMMIT=`$(shell git rev-parse --short HEAD)`
+      export COMMIT=`git rev-parse --short HEAD`
   - type: Command
     name: "Echo Variables"
     command: |
