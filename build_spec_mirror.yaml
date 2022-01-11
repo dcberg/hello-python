@@ -1,0 +1,11 @@
+version: 0.1
+component: build
+timeoutInSeconds: 6000
+shell: bash
+
+steps:
+  - type: Command
+    name: "Mirror remote repo"
+    timeoutInSeconds: 400
+    command: |
+      oci devops repository mirror --repository-id ocid1.devopsrepository.oc1.phx.amaaaaaayat6pyaah6x6oynezgenfvpj4qwcb4fdpy2jzvjkmr6rizuoovrq
