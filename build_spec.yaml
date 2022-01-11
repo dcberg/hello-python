@@ -49,7 +49,7 @@ steps:
       docker login -u "danberg" -p ${docker_registry_password}
   - type: Command
     timeoutInSeconds: 400
-    name: "Push image to Dockerhub"
+    name: "Push image to Dockerhub with proper tag"
     command: |
       docker push danberg/hello-py:$TAG_VERSION
         
