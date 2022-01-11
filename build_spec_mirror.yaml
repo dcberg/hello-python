@@ -9,12 +9,13 @@ steps:
     timeoutInSeconds: 400
     command: |
       oci -v
-      curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh
+      curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh --output install_oci.sh
   - type: Command
     name: "Update OCI CLI"
     timeoutInSeconds: 400
     command: |
-      ./install.sh --accept-all-defaults
+      chmod +x ${OCI_WORKSPACE_DIR}/install_oci.sh
+      ${OCI_WORKSPACE_DIR}/install_oci.sh --accept-all-defaults true
   - type: Command
     name: "Mirror remote repo"
     timeoutInSeconds: 400
