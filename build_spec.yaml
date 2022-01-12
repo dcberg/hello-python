@@ -16,12 +16,12 @@ inputArtifacts:
 steps:
   - type: Command
     name: "Export image tag"
-    timeoutInSeconds: 40
+    timeoutInSeconds: 400
     command: |
       export TAG_VERSION=`echo ${OCI_BUILD_RUN_ID} | tail -c 8`
   - type: Command
     name: "Export commit tag"
-    timeoutInSeconds: 20
+    timeoutInSeconds: 200
     command: |
       export COMMIT=`git rev-parse --short HEAD`
   - type: Command
@@ -43,7 +43,7 @@ steps:
           echo "Image build failure successfully handled"
         timeoutInSeconds: 400
   - type: Command
-    timeoutInSeconds: 60
+    timeoutInSeconds: 600
     name: "Log into Dockerhub"
     command: |
       docker login -u "danberg" -p ${docker_registry_password}
