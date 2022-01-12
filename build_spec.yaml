@@ -56,7 +56,7 @@ steps:
     timeoutInSeconds: 40
     name: "Copy Kubernetes manifest"
     command: |
-      cp /kubernetes/deployment_oke.yaml deployment/deployment_oke.yaml
+      cp ${OCI_PRIMARY_SOURCE_DIR}/kubernetes/deployment_oke.yaml deployment/deployment_oke.yaml
         
 outputArtifacts:
   - name: deployment-manifest
