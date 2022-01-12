@@ -2,7 +2,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: hello-py-svc
-  namespace: ${namespace}
 spec:
   selector:
     app: hello-py
@@ -18,7 +17,6 @@ metadata:
   labels:
     app: hello-py
   name: hello-py
-  namespace: ${namespace}
 spec:
   replicas: 3
   strategy:
@@ -44,7 +42,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: hello-py-ingress
-  namespace: ${namespace}
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
