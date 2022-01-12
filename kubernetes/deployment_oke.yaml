@@ -35,7 +35,7 @@ spec:
         app: hello-py
     spec:
       containers:
-      - image: "danberg/hello-py:${image_tag}"
+      - image: "danberg/hello-py:${TAG_VERSION}"
         name: hello-py
         ports:
           - containerPort: 5000
